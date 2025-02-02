@@ -3,9 +3,12 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <header className="bg-blue-600 text-white p-4">
-      <div className="container mx-auto">
-        <h1 className="text-2xl font-bold">My Portfolio</h1>
+    <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-6 px-4 shadow-lg">
+      <div className="container mx-auto flex items-center justify-between">
+        <h1 className="text-3xl font-bold tracking-tight hover:text-blue-200 transition duration-300">
+          My Portfolio
+        </h1>
+      
       </div>
     </header>
   );
