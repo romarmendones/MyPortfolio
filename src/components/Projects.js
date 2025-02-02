@@ -3,9 +3,9 @@ import React from 'react';
 
 const Projects = () => {
   const projects = [
-    { id: 1, name: 'Project 1', description: 'A brief description of Project 1.' },
-    { id: 2, name: 'Project 2', description: 'A brief description of Project 2.' },
-    { id: 3, name: 'Project 3', description: 'A brief description of Project 3.' },
+    { id: 1, name: 'Capstone Project', description: ' SmartStocksManager: A Web Sales And Warehouse Management System', link: 'https://smart-stocks-manager.vercel.app/' },
+    { id: 2, name: 'Project 2', description: 'A brief description of Project 2.', link: 'https://project2.com' },
+    { id: 3, name: 'Project 3', description: 'A brief description of Project 3.', link: 'https://project3.com' },
   ];
 
   return (
