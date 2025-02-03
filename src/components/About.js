@@ -46,7 +46,9 @@ const About = () => {
               transition={{ delay: 0.2 }}
               className="text-xl text-gray-600 mb-8 leading-relaxed"
             >
-              Hi, I'm Rodanto Mari N. Mendones, a web developer focused on building modern applications. I create responsive, user-friendly experiences with clean code and cutting-edge technologies. I aim to deliver solutions that combine technical excellence with great user experience.
+              Hi, I'm Rodanto Mari N. Mendones, a  Junior web developer focused on building modern applications. 
+              I create responsive, user-friendly experiences with clean code and cutting-edge technologies. 
+              I aim to deliver solutions that combine technical excellence with great user experience.
             </motion.p>
             <motion.h3 
               initial={{ opacity: 0 }}
