@@ -7,6 +7,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -16,22 +17,34 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-gray-50 text-gray-900 antialiased;
   }
 
   ::selection {
     @apply bg-blue-500 text-white;
+  }
+
+  :focus {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
   }
 }
 
 /* Custom component styles */
 @layer components {
   .container {
-    @apply px-4 mx-auto max-w-7xl;
+    @apply px-4 mx-auto max-w-7xl w-full;
   }
   
   .section {
-    @apply py-16 md:py-24;
+    @apply py-16 md:py-24 w-full;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
   }
 }
 
@@ -39,7 +52,7 @@
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-  @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+  @apply bg-gray-100 px-2 py-1 rounded text-sm border border-gray-200;
 }
 
 /* Custom animations */
@@ -54,6 +67,34 @@ code {
   }
 }
 
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .animate-fadeIn {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Responsive utilities */
+@screen md {
+  .container {
+    @apply px-6;
+  }
+}
+
+@screen lg {
+  .container {
+    @apply px-8;
+  }
 }

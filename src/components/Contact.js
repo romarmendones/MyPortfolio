@@ -10,36 +10,81 @@
         message: ''
       });
       const [status, setStatus] = useState('');
+      const [isSubmitting, setIsSubmitting] = useState(false);
+      const [errorMessage, setErrorMessage] = useState('');
+
+      const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      };
 
       const handleChange = (e) => {
         setFormData({
           ...formData,
           [e.target.id]: e.target.value
         });
+        // Clear error message when user starts typing
+        setErrorMessage('');
       };
 
       const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
         setStatus('sending');
-
         
+        // Validate form data
+        if (!formData.name.trim()) {
+          setErrorMessage('Please enter your name');
+          setStatus('error');
+          setIsSubmitting(false);
+          return;
+        }
+
+        if (!validateEmail(formData.email)) {
+          setErrorMessage('Please enter a valid email address');
+          setStatus('error');
+          setIsSubmitting(false);
+          return;
+        }
+
+        if (!formData.message.trim()) {
+          setErrorMessage('Please enter your message');
+          setStatus('error');
+          setIsSubmitting(false);
+          return;
+        }
+
         try {
+          // Store message in Supabase
           const { error } = await supabase
-            .from('messages')
-            .insert([formData]);
+            .from('contact_messages')
+            .insert([
+              {
+                name: formData.name.trim(),
+                email: formData.email.trim(),
+                message: formData.message.trim(),
+                created_at: new Date().toISOString()
+              }
+            ]);
 
           if (error) throw error;
 
           setStatus('success');
-          setFormData({ name: '', email: '', message: '' });
-          setTimeout(() => setStatus(''), 3000);
+          // Clear form after successful submission
+          setFormData({
+            name: '',
+            email: '',
+            message: ''
+          });
         } catch (error) {
-          console.error('Error:', error);
+          console.error('Error submitting form:', error);
+          setErrorMessage('Failed to send message. Please try again later.');
           setStatus('error');
-          setTimeout(() => setStatus(''), 3000);
+        } finally {
+          setIsSubmitting(false);
         }
       };
-
+      
       return (
         <motion.section 
           className="py-12 bg-gray-50"
@@ -68,6 +113,9 @@
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
+                  minLength={2}
+                  maxLength={50}
                 />
               </div>
               <div className="mb-6">
@@ -82,6 +130,8 @@
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
+                  maxLength={100}
                 />
               </div>
               <div className="mb-6">
@@ -95,17 +145,30 @@
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
+                  minLength={10}
+                  maxLength={1000}
                 ></textarea>
               </div>
               <div className="flex items-center justify-between">
                 <button
                   className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ${
-                    status === 'sending' ? 'opacity-50 cursor-not-allowed' : ''
+                    isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                   type="submit"
-                  disabled={status === 'sending'}
+                  disabled={isSubmitting}
                 >
-                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                  {status === 'sending' ? (
+                    <div className="flex items-center justify-center">
+                      <span className="mr-2">Sending</span>
+                      <motion.span
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      >
+                        ⟳
+                      </motion.span>
+                    </div>
+                  ) : 'Send Message'}
                 </button>
               </div>
               {status === 'success' && (
@@ -114,7 +177,7 @@
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
-                  Message sent successfully!
+                  Message sent successfully! We'll get back to you soon.
                 </motion.p>
               )}
               {status === 'error' && (
@@ -123,7 +186,7 @@
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
-                  Failed to send message. Please try again.
+                  {errorMessage || 'Failed to send message. Please try again.'}
                 </motion.p>
               )}
             </form>
