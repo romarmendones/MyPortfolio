@@ -28,7 +28,7 @@ const Projects = () => {
       description: 'A full-stack task management application with real-time updates, user authentication, and collaborative features.',
       link: 'https://task-manager-demo.com',
       image: '/images/task-manager.png',
-      tech: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
+      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
       features: ['Real-time updates', 'Team collaboration', 'Task analytics']
     },
 
