@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 const About = () => {
   const skills = [
-    { name: 'ReactJS', bgColor: 'bg-blue-100', textColor: 'text-blue-800', icon: '/icons/react.svg',  },
+    { name: 'React', bgColor: 'bg-blue-100', textColor: 'text-blue-800', icon: '/icons/react.svg',  },
     { name: 'Supabase', bgColor: 'bg-green-100', textColor: 'text-green-800', icon: '/icons/supabase.svg',  },
     { name: 'Tailwind CSS', bgColor: 'bg-purple-100', textColor: 'text-purple-800', icon: '/icons/tailwind.svg',  },
     { name: 'JavaScript', bgColor: 'bg-indigo-100', textColor: 'text-indigo-800', icon: '/icons/javascript.svg',  }
