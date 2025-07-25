@@ -30,39 +30,102 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   }
 });
 
-// Helper functions for common Supabase operations
-export const uploadFile = async (bucket, path, file) => {
-  const { data, error } = await supabase.storage
-    .from(bucket)
-    .upload(path, file, {
-      cacheControl: '3600',
-      upsert: false
-    });
-  if (error) throw error;
-  return data;
+// Enhanced helper functions with better error handling and type checking
+export const uploadFile = async (bucket, path, file, options = {}) => {
+  try {
+    if (!bucket || !path || !file) {
+      throw new Error('Missing required parameters for file upload');
+    }
+
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .upload(path, file, {
+        cacheControl: '3600',
+        upsert: false,
+        ...options
+      });
+
+    if (error) throw error;
+    return { data, error: null };
+  } catch (error) {
+    return handleSupabaseError(error);
+  }
 };
 
 export const downloadFile = async (bucket, path) => {
-  const { data, error } = await supabase.storage
-    .from(bucket)
-    .download(path);
-  if (error) throw error;
-  return data;
+  try {
+    if (!bucket || !path) {
+      throw new Error('Missing required parameters for file download');
+    }
+
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .download(path);
+
+    if (error) throw error;
+    return { data, error: null };
+  } catch (error) {
+    return handleSupabaseError(error);
+  }
 };
 
 export const deleteFile = async (bucket, path) => {
-  const { data, error } = await supabase.storage
-    .from(bucket)
-    .remove([path]);
-  if (error) throw error;
-  return data;
+  try {
+    if (!bucket || !path) {
+      throw new Error('Missing required parameters for file deletion');
+    }
+
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .remove([path]);
+
+    if (error) throw error;
+    return { data, error: null };
+  } catch (error) {
+    return handleSupabaseError(error);
+  }
 };
 
-// Custom error handler for Supabase operations
+// New utility functions
+export const listFiles = async (bucket, path = '') => {
+  try {
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .list(path);
+
+    if (error) throw error;
+    return { data, error: null };
+  } catch (error) {
+    return handleSupabaseError(error);
+  }
+};
+
+export const getPublicUrl = (bucket, path) => {
+  if (!bucket || !path) {
+    throw new Error('Missing required parameters for public URL generation');
+  }
+  
+  const { data } = supabase.storage
+    .from(bucket)
+    .getPublicUrl(path);
+
+  return data.publicUrl;
+};
+
+// Improved error handler with specific error types
 export const handleSupabaseError = (error) => {
-  console.error('Supabase operation failed:', error.message);
-  // Add custom error handling logic here
-  throw error;
+  const errorDetails = {
+    message: error.message,
+    code: error?.code || 'UNKNOWN_ERROR',
+    timestamp: new Date().toISOString(),
+  };
+
+  console.error('Supabase operation failed:', errorDetails);
+
+  return {
+    data: null,
+    error: errorDetails,
+  };
 };
 
 export default supabase;

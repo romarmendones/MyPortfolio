@@ -1,18 +1,26 @@
 // src/components/Header.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   const navItems = [
-    { title: 'About', href: '/about' },
-    { title: 'Projects', href: '/projects' },
-    { title: 'Contact', href: '/contact' }
+    { title: 'About', href: '/about', icon: '👤' },
+    { title: 'Projects', href: '/projects', icon: '💼' }
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -28,31 +36,38 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-      className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-6 px-4 shadow-lg sticky top-0 z-50"
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-gray-900/95 backdrop-blur-md text-white shadow-lg py-2' 
+          : 'bg-transparent text-white py-3'
+      }`}
     >
-      <div className="container mx-auto flex items-center justify-between">
+      <div className="container mx-auto flex items-center justify-between px-4 lg:px-6">
         <motion.h1 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="text-3xl font-bold tracking-tight hover:text-blue-200 transition duration-300 cursor-pointer"
+          className="text-xl md:text-2xl font-bold tracking-tight cursor-pointer"
           onClick={() => handleNavigation('/')}
         >
-          My Portfolio
+          <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Portfolio
+          </span>
         </motion.h1>
         
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-6">
           {navItems.map((item, index) => (
             <motion.a
               key={index}
               onClick={() => handleNavigation(item.href)}
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`text-lg font-medium transition duration-300 relative group cursor-pointer
-                ${location.pathname === item.href ? 'text-blue-200' : 'hover:text-blue-200'}`}
+              className={`text-sm font-medium transition-all duration-300 relative group cursor-pointer flex items-center gap-1
+                ${location.pathname === item.href ? 'text-purple-400' : 'hover:text-purple-400'}`}
             >
+              <span className="opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                {item.icon}
+              </span>
               {item.title}
-              <span className={`absolute bottom-0 left-0 h-0.5 bg-blue-200 transition-all duration-300
-                ${location.pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
             </motion.a>
           ))}
         </nav>
@@ -61,10 +76,10 @@ const Header = () => {
           <motion.button 
             onClick={toggleMenu}
             whileTap={{ scale: 0.95 }}
-            className="text-white focus:outline-none"
+            className="focus:outline-none p-1.5 rounded-lg hover:bg-white/10"
             aria-label="Toggle menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
@@ -81,7 +96,7 @@ const Header = () => {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full left-0 right-0 bg-blue-700 shadow-lg overflow-hidden"
+                className="absolute top-full left-0 right-0 bg-transparent backdrop-blur-sm shadow-lg"
               >
                 {navItems.map((item, index) => (
                   <motion.div
@@ -90,9 +105,12 @@ const Header = () => {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => handleNavigation(item.href)}
-                    className={`block px-4 py-3 text-lg transition duration-300 cursor-pointer
-                      ${location.pathname === item.href ? 'bg-blue-800' : 'hover:bg-blue-800'}`}
+                    className={`flex items-center gap-2 px-4 py-3 text-sm text-white transition-all duration-300 cursor-pointer
+                      ${location.pathname === item.href 
+                        ? 'bg-white/10 text-purple-400' 
+                        : 'hover:bg-white/10 hover:text-purple-400'}`}
                   >
+                    <span className="text-base opacity-70">{item.icon}</span>
                     {item.title}
                   </motion.div>
                 ))}
