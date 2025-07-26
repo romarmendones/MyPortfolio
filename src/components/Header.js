@@ -52,7 +52,7 @@ const Header = () => {
           onClick={() => handleNavigation('/')}
         >
           <span className="bg-gradient-to-r from-teal-400 via-purple-500 to-pink-500 bg-clip-text text-transparent hover:from-teal-300 hover:via-purple-400 hover:to-pink-400 transition-all duration-300">
-            My Resume 
+            My Portfolio
           </span>
         </motion.h1>
         
