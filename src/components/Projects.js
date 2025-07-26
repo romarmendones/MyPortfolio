@@ -16,28 +16,8 @@ const Projects = () => {
       features: ['Real-time inventory tracking', 'Sales analytics', 'User management', 'Automated reports'],
       status: 'Live'
     },
-    { 
-      id: 2, 
-      name: 'Portfolio Website', 
-      description: 'A modern, responsive portfolio website built with React and Tailwind CSS, featuring smooth animations and a clean design.',
-      link: 'https://your-portfolio-url.com',
-      github: 'https://github.com/yourusername/portfolio',
-      image: '/images/portfolio.png',
-      tech: ['React', 'Tailwind CSS', 'Framer Motion'],
-      features: ['Responsive design', 'Dark mode', 'Contact form'],
-      status: 'Live'
-    },
-    { 
-      id: 3, 
-      name: 'Task Management App', 
-      description: 'A full-stack task management application with real-time updates, user authentication, and collaborative features.',
-      link: 'https://task-manager-demo.com',
-      github: 'https://github.com/yourusername/task-manager',
-      image: '/images/task-manager.png',
-      tech: ['React', 'Node.js', 'MongoDB', 'Express'],
-      features: ['Real-time updates', 'Team collaboration', 'Task analytics'],
-      status: 'In Development'
-    },
+    
+    
    
   ];
 

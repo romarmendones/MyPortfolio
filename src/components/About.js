@@ -5,67 +5,65 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaReact, FaJs, FaGitAlt, FaNode } from 'react-icons/fa';
 import { SiSupabase, SiTailwindcss, SiTypescript } from 'react-icons/si';
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
-};
-
-// Moved skills array outside component for better performance
-const skills = [
-  { 
-    name: 'React', 
-    bgColor: 'bg-blue-50', 
-    textColor: 'text-blue-700',
-    icon: <FaReact className="w-5 h-5" />,
-    level: 'Advanced'
-  },
-  
-  { 
-    name: 'TypeScript', 
-    bgColor: 'bg-indigo-50', 
-    textColor: 'text-indigo-700',
-    icon: <SiTypescript className="w-5 h-5" />,
-    level: 'Intermediate'
-  },
-  { 
-    name: 'Supabase', 
-    bgColor: 'bg-emerald-50', 
-    textColor: 'text-emerald-700',
-    icon: <SiSupabase className="w-5 h-5" />,
-    level: 'Intermediate'
-  },
-  { 
-    name: 'Tailwind CSS', 
-    bgColor: 'bg-violet-50', 
-    textColor: 'text-violet-700',
-    icon: <SiTailwindcss className="w-5 h-5" />,
-    level: 'Advanced'
-  },
-  { 
-    name: 'JavaScript', 
-    bgColor: 'bg-amber-50', 
-    textColor: 'text-amber-700',
-    icon: <FaJs className="w-5 h-5" />,
-    level: 'Advanced'
-  },
-  {
-    name: 'Node.js',
-    bgColor: 'bg-teal-50',
-    textColor: 'text-teal-700',
-    icon: <FaNode className="w-5 h-5" />,
-    level: 'Intermediate'
-  },
-  {
-    name: 'Git',
-    bgColor: 'bg-orange-50',
-    textColor: 'text-orange-700',
-    icon: <FaGitAlt className="w-5 h-5" />,
-    level: 'Advanced'
-  }
-];
-
 const About = () => {
+  const fadeInUp = useMemo(() => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  }), []);
+
+  const skills = useMemo(() => [
+    { 
+      name: 'React', 
+      bgColor: 'bg-blue-50', 
+      textColor: 'text-blue-700',
+      icon: <FaReact className="w-5 h-5" />,
+      level: 'Advanced'
+    },
+    { 
+      name: 'TypeScript', 
+      bgColor: 'bg-indigo-50', 
+      textColor: 'text-indigo-700',
+      icon: <SiTypescript className="w-5 h-5" />,
+      level: 'Intermediate'
+    },
+    { 
+      name: 'Supabase', 
+      bgColor: 'bg-emerald-50', 
+      textColor: 'text-emerald-700',
+      icon: <SiSupabase className="w-5 h-5" />,
+      level: 'Intermediate'
+    },
+    { 
+      name: 'Tailwind CSS', 
+      bgColor: 'bg-violet-50', 
+      textColor: 'text-violet-700',
+      icon: <SiTailwindcss className="w-5 h-5" />,
+      level: 'Advanced'
+    },
+    { 
+      name: 'JavaScript', 
+      bgColor: 'bg-amber-50', 
+      textColor: 'text-amber-700',
+      icon: <FaJs className="w-5 h-5" />,
+      level: 'Advanced'
+    },
+    {
+      name: 'Node.js',
+      bgColor: 'bg-teal-50',
+      textColor: 'text-teal-700',
+      icon: <FaNode className="w-5 h-5" />,
+      level: 'Intermediate'
+    },
+    {
+      name: 'Git',
+      bgColor: 'bg-orange-50',
+      textColor: 'text-orange-700',
+      icon: <FaGitAlt className="w-5 h-5" />,
+      level: 'Advanced'
+    }
+  ], []);
+
   const profileVariants = useMemo(() => ({
     hover: { 
       scale: 1.05, 
@@ -122,57 +120,44 @@ const About = () => {
 
           <div className="max-w-3xl">
             <motion.h2 
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              className="text-4xl sm:text-5xl font-bold mb-8 text-slate-800 relative inline-block tracking-tight"
-            >
-              About Me
-              <motion.div 
-                className="absolute -bottom-3 left-0 h-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: '100%' }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              />
-            </motion.h2>
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl sm:text-4xl font-bold text-slate-800 mb-4"  
+
+            ></motion.h2>
 
             <motion.p 
               variants={fadeInUp}
-              className="text-base sm:text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium"
+              className="text-base sm:text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-large"
             >
-              Hi, I'm Rodanto Mari N. Mendones, a Junior web developer passionate about creating modern web applications. 
-              With expertise in React and related technologies, I specialize in building responsive, 
-              user-friendly experiences with clean, maintainable code. My goal is to deliver solutions 
-              that combine technical excellence with exceptional user experience.
+             ROMAR MENDONES
             </motion.p>
 
-            <motion.h3 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-xl sm:text-2xl font-bold mb-6 text-slate-700"
-            >
-              Technical Skills
-            </motion.h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-              {memoizedSkills.map((skill, index) => (
-                <motion.div 
-                  key={skill.name}
-                  variants={skillVariants}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.1 * index }}
-                  whileHover="hover"
-                  className={`px-4 py-3 ${skill.bgColor} ${skill.textColor} rounded-lg font-semibold flex items-center gap-3 
-                    shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200/50 backdrop-blur-sm`}
-                  role="listitem"
-                  aria-label={`${skill.name} - ${skill.level}`}
-                >
-                  {skill.icon}
-                  <span className="whitespace-nowrap text-sm">{skill.name}</span>
-                  <span className="text-xs opacity-75 hidden md:inline ml-auto font-medium">• {skill.level}</span>
-                </motion.div>
-              ))}
+            {/* Skills Section */}
+            <div className="mt-12">
+              <motion.h3 
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                className="text-2xl sm:text-3xl font-bold mb-6 text-slate-800"
+              >
+                Technical Skills
+              </motion.h3>
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {memoizedSkills.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    variants={skillVariants}
+                    whileHover="hover"
+                    className={`${skill.bgColor} ${skill.textColor} p-4 rounded-lg flex flex-col items-center justify-center space-y-2 cursor-pointer transition-colors duration-300`}
+                  >
+                    {skill.icon}
+                    <span className="font-medium text-sm">{skill.name}</span>
+                    <span className="text-xs opacity-75">{skill.level}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
