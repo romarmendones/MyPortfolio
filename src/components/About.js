@@ -111,30 +111,30 @@ const About = () => {
                 className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                 loading="lazy"
                 onError={(e) => {
-                  e.currentTarget.src = 'fallback-image-url.jpg';
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/40 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-            </motion.div>
-          </AnimatePresence>
+                    e.currentTarget.src = 'fallback-image-url.jpg';
+                  }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/40 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                </motion.div>
+                </AnimatePresence>
 
-          <div className="max-w-3xl">
-            <motion.h2 
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-4xl font-bold text-slate-800 mb-4"  
+                <div className="max-w-3xl">
+                <motion.h2 
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-5xl sm:text-6xl font-bold text-slate-800 mb-4"  
 
-            ></motion.h2>
+                ></motion.h2>
 
-            <motion.p 
-              variants={fadeInUp}
-              className="text-base sm:text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-large"
-            >
-             ROMAR MENDONES
-            </motion.p>
+                <motion.p 
+                  variants={fadeInUp}
+                  className="text-2xl sm:text-3xl md:text-4xl text-slate-600 mb-10 leading-relaxed font-bold uppercase"
+                >
+                  Rodanto Mari N. Mendones
+                </motion.p>
 
-            {/* Skills Section */}
+                {/* Skills Section */}
             <div className="mt-12">
               <motion.h3 
                 initial={{ x: -20, opacity: 0 }}

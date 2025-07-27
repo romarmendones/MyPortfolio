@@ -11,7 +11,7 @@ const Projects = () => {
       description: 'A comprehensive web-based sales and warehouse management system designed to streamline inventory tracking, order processing, and business analytics.',
       link: 'https://smart-stocks-manager-web.vercel.app/',
       github: 'https://github.com/romarmendones/SmartStocksManager-Web', 
-      image: 'images/Logo.png',
+      image: 'image/SmartStocks.png',
       tech: ['React', 'Supabase', 'Tailwind CSS', 'JavaScript'],
       features: ['Real-time inventory tracking', 'Sales analytics', 'User management', 'Automated reports'],
       status: 'Live'
