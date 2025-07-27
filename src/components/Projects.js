@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaRegFolder, FaStar } from 'react-icons/fa';
 
+
 const Projects = () => {
   const projects = [
     { 
@@ -11,10 +12,10 @@ const Projects = () => {
       description: 'A comprehensive web-based sales and warehouse management system designed to streamline inventory tracking, order processing, and business analytics.',
       link: 'https://smart-stocks-manager-web.vercel.app/',
       github: 'https://github.com/romarmendones/SmartStocksManager-Web', 
-      image: 'image/SmartStocks.png',
+      src: '/image/SmartStocks.png',
       tech: ['React', 'Supabase', 'Tailwind CSS', 'JavaScript'],
       features: ['Real-time inventory tracking', 'Sales analytics', 'User management', 'Automated reports'],
-      status: 'Live'
+      
     },
     
     

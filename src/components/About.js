@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaReact, FaJs, FaGitAlt, FaNode } from 'react-icons/fa';
 import { SiSupabase, SiTailwindcss, SiTypescript } from 'react-icons/si';
 
+
+
 const About = () => {
   const fadeInUp = useMemo(() => ({
     initial: { opacity: 0, y: 20 },
@@ -18,49 +20,49 @@ const About = () => {
       bgColor: 'bg-blue-50', 
       textColor: 'text-blue-700',
       icon: <FaReact className="w-5 h-5" />,
-      level: 'Advanced'
+     
     },
     { 
       name: 'TypeScript', 
       bgColor: 'bg-indigo-50', 
       textColor: 'text-indigo-700',
       icon: <SiTypescript className="w-5 h-5" />,
-      level: 'Intermediate'
+      
     },
     { 
       name: 'Supabase', 
       bgColor: 'bg-emerald-50', 
       textColor: 'text-emerald-700',
       icon: <SiSupabase className="w-5 h-5" />,
-      level: 'Intermediate'
+      
     },
     { 
       name: 'Tailwind CSS', 
       bgColor: 'bg-violet-50', 
       textColor: 'text-violet-700',
       icon: <SiTailwindcss className="w-5 h-5" />,
-      level: 'Advanced'
+     
     },
     { 
       name: 'JavaScript', 
       bgColor: 'bg-amber-50', 
       textColor: 'text-amber-700',
       icon: <FaJs className="w-5 h-5" />,
-      level: 'Advanced'
+      
     },
     {
       name: 'Node.js',
       bgColor: 'bg-teal-50',
       textColor: 'text-teal-700',
       icon: <FaNode className="w-5 h-5" />,
-      level: 'Intermediate'
+      
     },
     {
       name: 'Git',
       bgColor: 'bg-orange-50',
       textColor: 'text-orange-700',
       icon: <FaGitAlt className="w-5 h-5" />,
-      level: 'Advanced'
+      
     }
   ], []);
 

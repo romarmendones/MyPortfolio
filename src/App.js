@@ -5,6 +5,10 @@ import Header from './components/Header';
 import About from './components/About';
 import Projects from './components/Projects';
 import Services from './components/Services';
+import Experience from './components/Experience';
+
+
+
 
 function App() {
   return (
@@ -15,6 +19,9 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/experiences" element={<Experience />} />
+        <Route path="*" element={<About />} /> {/* Fallback to About for unknown routes */}
+        
       </Routes>
     </div>
   );
