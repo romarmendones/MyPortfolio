@@ -9,7 +9,7 @@ const Projects = () => {
     { 
       id: 1, 
       name: 'SmartStocksManager', 
-      description: 'A  Capstone Project comprehensive web-based sales and warehouse management system designed to streamline inventory tracking, order processing, and business analytics.',
+      description: 'A  Capstone Project comprehensive web and mobile sales and warehouse management system designed to streamline inventory tracking, order processing, and business analytics.',
       link: 'https://smart-stocks-manager-web.vercel.app/',
       github: 'https://github.com/romarmendones/SmartStocksManager-Web', 
       src: '/image/SmartStocks.png',
