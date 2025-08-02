@@ -156,7 +156,6 @@ const About = () => {
                   >
                     {skill.icon}
                     <span className="font-medium text-sm">{skill.name}</span>
-                    <span className="text-xs opacity-75">{skill.level}</span>
                   </motion.div>
                 ))}
               </div>
