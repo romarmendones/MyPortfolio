@@ -8,18 +8,27 @@ const Experience = () => {
       company: "",
       duration: "",
       description: [
-        "",
+        
       ],
-      skills: []
+      skills: ['']
     },
     {
       title: "",
       company: "",
       duration: "",
       description: [
-        "",
+        
       ],
-      skills: [""]
+      skills: ['']
+    },
+    {
+      title: "",
+      company: "",
+      duration: "",
+      description: [
+        
+      ],
+      skills: ['']
     }
   ];
 
@@ -47,7 +56,7 @@ const Experience = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">Professional Experience</h2>
+        <h2 className="text-4xl font-bold text-center mb-12 text-black">Professional Experience</h2>
         
         <motion.div
           variants={containerVariants}
