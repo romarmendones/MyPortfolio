@@ -2,8 +2,8 @@
 import React, { useMemo } from 'react';
 import Profile from '../image/Profile.jpg';
 import { motion } from 'framer-motion';
-import { FaReact, FaJs, FaGitAlt, FaNode, FaGithub, FaLinkedin } from 'react-icons/fa';
-import { SiSupabase, SiTailwindcss, SiTypescript, SiNextdotjs } from 'react-icons/si';
+import { FaReact, FaJs, FaGitAlt, FaNode, FaGithub, FaLinkedin, FaNodeJs } from 'react-icons/fa';
+import { SiSupabase, SiTailwindcss, SiTypescript } from 'react-icons/si';
 
 const About = () => {
 
@@ -29,9 +29,9 @@ const About = () => {
       description: 'Frontend Development',
       delay: 0.1
     },
-    { 
-      name: 'Express.js', 
-      bgColor: 'bg-gradient-to-br from-gray-800 to-gray-900', 
+    {
+      name: 'Express.js',
+      bgColor: 'bg-gradient-to-br from-yellow-500 to-yellow-600',
       textColor: 'text-white',
       icon: <FaNodeJs className="w-6 h-6" />,
       description: 'Backend Development',
