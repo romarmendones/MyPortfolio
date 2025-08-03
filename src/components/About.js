@@ -33,7 +33,7 @@ const About = () => {
       name: 'Express.js', 
       bgColor: 'bg-gradient-to-br from-gray-800 to-gray-900', 
       textColor: 'text-white',
-      icon: <SiNextdotjs className="w-6 h-6" />,
+      icon: <SiNodejs className="w-6 h-6" />,
       description: 'Backend Development',
       delay: 0.2
     },
