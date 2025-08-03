@@ -10,6 +10,7 @@ import Experience from './components/Experience';
 
 
 
+
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<About />} />
         <Route path="/about" element={<About />} />
+       
         <Route path="/services" element={<Services />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/experiences" element={<Experience />} />

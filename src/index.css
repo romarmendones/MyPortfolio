@@ -69,6 +69,26 @@
   .input {
     @apply px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 transition-all duration-200;
   }
+
+  /* Horizontal scroll utilities */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
+
+  /* Smooth horizontal scroll */
+  .scroll-smooth-horizontal {
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+  }
+
+  .scroll-snap-start {
+    scroll-snap-align: start;
+  }
 }
 
 /* Code block styling */
