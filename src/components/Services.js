@@ -22,7 +22,7 @@ const Services = () => {
       title: 'Backend Development',
       icon: '⚙️',
       description: 'Creating robust and scalable server-side solutions with modern technologies.',
-      technologies: ['Node.js', 'Supabase', 'PostgreSQL', 'Express'],
+      technologies: ['Node.js', 'Supabase', 'Express', 'MongoDB'],
       features: [
         'RESTful APIs',
         'Database Design',
@@ -33,15 +33,15 @@ const Services = () => {
     },
     {
       id: 3,
-      title: 'Full Stack Development',
+      title: 'Mobile Development',
       icon: '🚀',
       description: 'Combining frontend and backend expertise to deliver complete web solutions.',
-      technologies: ['React', 'Node.js', 'Supabase', 'Tailwind CSS'],
+      technologies: ['React Native', 'Expo', 'Firebase', 'Tailwind CSS'],
       features: [
-        'End-to-end Development',
-        'Real-time Applications',
-        'Deployment & Hosting',
-        'Performance Optimization'
+        'Cross-platform Development',
+        'Performance Optimization',
+        'User Interface Design',
+        'User Experience Design'
       ],
       gradient: 'from-orange-500 to-red-500'
     }
@@ -121,7 +121,7 @@ const Services = () => {
           {services.map((service, index) => (
             <motion.div
               key={service.id}
-              variants={itemVariants}
+              variants={{ ...itemVariants, ...cardHoverVariants }}
               whileHover="hover"
               className="group relative"
             >
