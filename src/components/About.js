@@ -82,7 +82,7 @@ const About = () => {
     const calculateSlides = () => {
       if (scrollContainerRef.current) {
         const containerWidth = scrollContainerRef.current.clientWidth;
-        const itemWidth = 140; // Increased width for better spacing
+        const itemWidth = 100; // Increased width for better spacing
         const itemsPerSlide = Math.floor(containerWidth / itemWidth);
         const total = Math.ceil(skills.length / itemsPerSlide);
         setTotalSlides(Math.max(1, total));
@@ -102,7 +102,7 @@ const About = () => {
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
       
       // Calculate current slide
-      const itemWidth = 140;
+      const itemWidth = 100;
       const current = Math.round(scrollLeft / itemWidth);
       setCurrentSlide(Math.min(current, totalSlides - 1));
     }
@@ -111,7 +111,7 @@ const About = () => {
   // Scroll functions
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      const itemWidth = 140;
+      const itemWidth = 100;
       const currentScroll = scrollContainerRef.current.scrollLeft;
       const targetScroll = Math.max(0, currentScroll - itemWidth * 3);
       scrollContainerRef.current.scrollTo({ left: targetScroll, behavior: 'smooth' });
@@ -131,8 +131,8 @@ const About = () => {
   // Go to specific slide
   const goToSlide = useCallback((slideIndex) => {
     if (scrollContainerRef.current) {
-      const itemWidth = 140;
-      const targetScroll = slideIndex * itemWidth * 3;
+      const itemWidth = 100;
+      const targetScroll = slideIndex * itemWidth * 1;
       scrollContainerRef.current.scrollTo({ left: targetScroll, behavior: 'smooth' });
     }
   }, []);
@@ -347,7 +347,7 @@ const About = () => {
             className="relative flex-shrink-0 group"
           >
             <motion.div 
-              className="relative overflow-hidden shadow-2xl w-72 h-72 lg:w-80 lg:h-80 rounded-3xl"
+              className="relative overflow-hidden shadow-2xl w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl"
               whileHover={{ scale: 1.02 }}
             >
               <img
