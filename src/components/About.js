@@ -1,16 +1,16 @@
 // src/components/About.js
-import React, { useMemo, useRef, useEffect, useState, useCallback } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import Profile from '../image/Profile.jpg';
 import { motion } from 'framer-motion';
 import { FaReact, FaJs, FaNodeJs, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiSupabase, SiTailwindcss, SiTypescript, SiPhp, SiPython, SiLaravel } from 'react-icons/si';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const About = () => {
-  const scrollContainerRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [totalSlides, setTotalSlides] = useState(0);
 
   const staggerContainer = useMemo(() => ({
     animate: {
@@ -77,77 +77,90 @@ const About = () => {
     }
   ], []);
 
-  // Calculate total slides based on container width and item width
-  useEffect(() => {
-    const calculateSlides = () => {
-      if (scrollContainerRef.current) {
-        const containerWidth = scrollContainerRef.current.clientWidth;
-        const itemWidth = 100; // Increased width for better spacing
-        const itemsPerSlide = Math.floor(containerWidth / itemWidth);
-        const total = Math.ceil(skills.length / itemsPerSlide);
-        setTotalSlides(Math.max(1, total));
+  // Slick slider settings
+  const sliderSettings = useMemo(() => ({
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
       }
-    };
-
-    calculateSlides();
-    window.addEventListener('resize', calculateSlides);
-    return () => window.removeEventListener('resize', calculateSlides);
-  }, [skills.length]);
-
-  // Check scroll position and update scroll indicators
-  const checkScrollPosition = useCallback(() => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
-      
-      // Calculate current slide
-      const itemWidth = 100;
-      const current = Math.round(scrollLeft / itemWidth);
-      setCurrentSlide(Math.min(current, totalSlides - 1));
-    }
-  }, [totalSlides]);
-
-  // Scroll functions
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      const itemWidth = 100;
-      const currentScroll = scrollContainerRef.current.scrollLeft;
-      const targetScroll = Math.max(0, currentScroll - itemWidth * 3);
-      scrollContainerRef.current.scrollTo({ left: targetScroll, behavior: 'smooth' });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      const itemWidth = 140;
-      const currentScroll = scrollContainerRef.current.scrollLeft;
-      const maxScroll = scrollContainerRef.current.scrollWidth - scrollContainerRef.current.clientWidth;
-      const targetScroll = Math.min(maxScroll, currentScroll + itemWidth * 3);
-      scrollContainerRef.current.scrollTo({ left: targetScroll, behavior: 'smooth' });
-    }
-  };
-
-  // Go to specific slide
-  const goToSlide = useCallback((slideIndex) => {
-    if (scrollContainerRef.current) {
-      const itemWidth = 100;
-      const targetScroll = slideIndex * itemWidth * 1;
-      scrollContainerRef.current.scrollTo({ left: targetScroll, behavior: 'smooth' });
-    }
-  }, []);
-
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', checkScrollPosition);
-      checkScrollPosition();
-      
-      return () => {
-        scrollContainer.removeEventListener('scroll', checkScrollPosition);
-      };
-    }
-  }, [totalSlides, checkScrollPosition]);
+    ],
+    beforeChange: (oldIndex, newIndex) => {
+      setCurrentSlide(newIndex);
+    },
+    customPaging: (i) => (
+      <motion.div
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.9 }}
+        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+          i === currentSlide
+            ? 'bg-gradient-to-r from-cyan-400 to-blue-500 shadow-md'
+            : 'bg-gray-600 hover:bg-gray-500'
+        }`}
+      />
+    ),
+    nextArrow: (
+      <motion.div
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute z-10 -translate-y-1/2 top-1/2 -right-6 w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm shadow-lg border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:shadow-xl transition-all duration-300"
+      >
+        <motion.svg 
+          className="w-7 h-7" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          animate={{ x: [0, 2, 0] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </motion.svg>
+      </motion.div>
+    ),
+    prevArrow: (
+      <motion.div
+        whileHover={{ scale: 1.1, rotate: -5 }}
+        whileTap={{ scale: 0.9 }}
+        className="absolute z-10 -translate-y-1/2 top-1/2 -left-6 w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm shadow-lg border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:shadow-xl transition-all duration-300"
+      >
+        <motion.svg 
+          className="w-7 h-7" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          animate={{ x: [0, -2, 0] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </motion.svg>
+      </motion.div>
+    )
+  }), [currentSlide]);
 
   const profileVariants = useMemo(() => ({
     initial: { scale: 0.8, opacity: 0, rotate: -5 },
@@ -502,124 +515,44 @@ const About = () => {
                 variants={staggerContainer}
                 className="relative"
               >
-                {/* Enhanced Skills Grid */}
+                {/* Enhanced Skills Grid with React Slick */}
                 <motion.div 
                   className="p-8 border shadow-2xl bg-white/5 backdrop-blur-xl rounded-3xl border-white/10"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {/* Navigation Arrows */}
-                  <div className="absolute z-10 -translate-y-1/2 top-1/2 -left-6">
-                    <motion.button
-                      onClick={scrollLeft}
-                      disabled={!canScrollLeft}
-                      whileHover={{ scale: 1.1, rotate: -5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className={`w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm shadow-lg border border-white/20 flex items-center justify-center transition-all duration-300 ${
-                        canScrollLeft 
-                          ? 'text-white hover:bg-white/20 hover:shadow-xl' 
-                          : 'text-gray-500 cursor-not-allowed opacity-50'
-                      }`}
-                      aria-label="Previous slide"
-                    >
-                      <motion.svg 
-                        className="w-7 h-7" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                        animate={{ x: canScrollLeft ? [0, -2, 0] : [0, 0, 0] }}
-                        transition={{ duration: 1, repeat: Infinity }}
+                  <Slider ref={sliderRef} {...sliderSettings}>
+                    {skills.map((skill, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: skill.delay, duration: 0.5 }}
+                        whileHover={{ scale: 1.05, y: -8, rotate: 2 }}
+                        className="flex flex-col items-center space-y-4 px-4 group cursor-pointer"
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                      </motion.svg>
-                    </motion.button>
-                  </div>
-
-                  <div className="absolute z-10 -translate-y-1/2 top-1/2 -right-6">
-                    <motion.button
-                      onClick={scrollRight}
-                      disabled={!canScrollRight}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className={`w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm shadow-lg border border-white/20 flex items-center justify-center transition-all duration-300 ${
-                        canScrollRight 
-                          ? 'text-white hover:bg-white/20 hover:shadow-xl' 
-                          : 'text-gray-500 cursor-not-allowed opacity-50'
-                      }`}
-                      aria-label="Next slide"
-                    >
-                      <motion.svg 
-                        className="w-7 h-7" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                        animate={{ x: canScrollRight ? [0, 2, 0] : [0, 0, 0] }}
-                        transition={{ duration: 1, repeat: Infinity }}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </motion.svg>
-                    </motion.button>
-                  </div>
-
-                  {/* Skills Carousel */}
-                  <div 
-                    ref={scrollContainerRef}
-                    className="overflow-x-auto scrollbar-hide scroll-smooth"
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                  >
-                    <div className="flex px-8 py-8 space-x-8 min-w-max">
-                      {skills.map((skill, index) => (
                         <motion.div
-                          key={index}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: skill.delay, duration: 0.5 }}
-                          whileHover={{ scale: 1.05, y: -8, rotate: 2 }}
-                          className="flex flex-col items-center space-y-4 min-w-[120px] group cursor-pointer"
+                          animate={{ rotate: [0, 8, 0] }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                          className={`w-20 h-20 flex items-center justify-center bg-gradient-to-br ${skill.color} rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110`}
                         >
-                          <motion.div
-                            animate={{ rotate: [0, 8, 0] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                            className={`w-20 h-20 flex items-center justify-center bg-gradient-to-br ${skill.color} rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110`}
+                          <motion.div 
+                            className="flex items-center justify-center w-full h-full p-3 text-white"
+                            whileHover={{ scale: 1.1 }}
                           >
-                            <motion.div 
-                              className="flex items-center justify-center w-full h-full p-3 text-white"
-                              whileHover={{ scale: 1.1 }}
-                            >
-                              {skill.icon}
-                            </motion.div>
+                            {skill.icon}
                           </motion.div>
-                          <motion.span 
-                            className="text-sm font-semibold text-center text-gray-300 transition-colors duration-300 group-hover:text-white"
-                            animate={{ opacity: [0.7, 1, 0.7] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                          >
-                            {skill.name}
-                          </motion.span>
                         </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  {/* Enhanced Pagination Dots */}
-                  {totalSlides > 1 && (
-                    <div className="flex items-center justify-center mt-8 space-x-3">
-                      {Array.from({ length: totalSlides }, (_, index) => (
-                        <motion.button
-                          key={index}
-                          onClick={() => goToSlide(index)}
-                          whileHover={{ scale: 1.2 }}
-                          whileTap={{ scale: 0.9 }}
-                          className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                            index === currentSlide
-                              ? 'bg-gradient-to-r from-cyan-400 to-blue-500 shadow-md'
-                              : 'bg-gray-600 hover:bg-gray-500'
-                          }`}
-                          aria-label={`Go to slide ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                  )}
+                        <motion.span 
+                          className="text-sm font-semibold text-center text-gray-300 transition-colors duration-300 group-hover:text-white"
+                          animate={{ opacity: [0.7, 1, 0.7] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          {skill.name}
+                        </motion.span>
+                      </motion.div>
+                    ))}
+                  </Slider>
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -627,13 +560,30 @@ const About = () => {
         </div>
       </div>
 
-      {/* Custom CSS for hiding scrollbar */}
+      {/* Custom CSS for Slick Slider */}
       <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
+        .slick-slider {
+          margin: 0 -8px;
         }
-        .scrollbar-hide::-webkit-scrollbar {
+        .slick-slide {
+          padding: 0 8px;
+        }
+        .slick-dots {
+          bottom: -40px;
+        }
+        .slick-dots li button:before {
+          color: rgba(156, 163, 175, 0.5);
+          font-size: 12px;
+        }
+        .slick-dots li.slick-active button:before {
+          color: #06b6d4;
+        }
+        .slick-prev, .slick-next {
+          width: 56px;
+          height: 56px;
+          z-index: 10;
+        }
+        .slick-prev:before, .slick-next:before {
           display: none;
         }
       `}</style>
