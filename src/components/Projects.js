@@ -1,253 +1,212 @@
 // src/components/Projects.js
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaStar, FaCode, FaRocket, FaLaptopCode } from 'react-icons/fa';
+import React, { useState, useEffect, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs } from 'react-icons/fa';
+import { SiTailwindcss, SiTypescript, SiSupabase, SiFirebase, SiMongodb, SiExpress } from 'react-icons/si';
 
 const Projects = () => {
-  const projects = [
-    { 
-      id: 1, 
-      name: 'SmartStocksManager', 
-      description: 'A comprehensive web and mobile sales and warehouse management system designed to streamline inventory tracking, order processing, and business analytics.',
-      link: 'https://smart-stocks-manager-web.vercel.app/',
-      github: 'https://github.com/romarmendones/SmartStocksManager-Web', 
-      tech: ['React', 'Supabase', 'Tailwind CSS', 'JavaScript'],
-      features: ['Real-time inventory tracking', 'Sales analytics', 'User management', 'Automated reports'],
-      status: 'Live',
-      category: 'Full-Stack'
-    },
-    // Add more projects here as needed
-  ];
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Define technology icons mapping
+  const techIcons = {
+    react: <FaReact className="text-cyan-400" />,
+    node: <FaNodeJs className="text-green-500" />,
+    tailwind: <SiTailwindcss className="text-teal-500" />,
+    typescript: <SiTypescript className="text-blue-600" />,
+    supabase: <SiSupabase className="text-emerald-500" />,
+    firebase: <SiFirebase className="text-amber-500" />,
+    mongodb: <SiMongodb className="text-green-600" />,
+    express: <SiExpress className="text-gray-600" />
+  };
+
+  // Sample projects data
+  const projects = useMemo(() => [
+    {
+      id: 1,
+      title: 'SMARTSTOCKS',
+      description: 'A full-featured e-commerce platform with product management, cart functionality, and secure payment processing.',
+      image: require('../image/Profile.jpg'),
+      technologies: ['react', 'tailwind', 'supabase'],
+      githubUrl: 'https://github.com/romar/smartstocks',
+      liveUrl: 'https://smart-stacks-manager-web.vercel.app/',
+      featured: true
+    },
+    
+   
+    
+  ], []);
+
+  // Load projects
+  useEffect(() => {
+    setIsLoading(true);
+    
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setFilteredProjects(projects);
+      setIsLoading(false);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, [projects]);
+
+  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2
+        staggerChildren: 0.1
       }
     }
   };
 
-  const itemVariants = {
-    hidden: { 
-      y: 50, 
-      opacity: 0,
-      scale: 0.95
-    },
+  const projectVariants = {
+    hidden: { y: 50, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      scale: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        type: 'spring',
+        stiffness: 80,
+        damping: 12
       }
-    }
-  };
-
-  const cardHoverVariants = {
+    },
     hover: {
-      y: -10,
+      y: -15,
+      boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
       transition: {
-        duration: 0.3,
-        ease: "easeOut"
+        type: 'spring',
+        stiffness: 300,
+        damping: 10
       }
-    }
+    },
+    tap: { scale: 0.98 }
   };
 
   return (
-    <motion.section 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      className="py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden"
-      aria-label="Featured Projects Section"
-    >
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-full blur-3xl"></div>
-      
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
-        <motion.div
-          initial={{ y: -30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
-          <h2 
-            className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent tracking-tight"
-            id="featured-projects"
-          >
-            Featured Projects
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Explore my latest work showcasing modern web development, innovative solutions, and cutting-edge technologies.
-          </p>
-        </motion.div>
+    <div className="container mx-auto px-4 py-16 max-w-7xl">
+      {/* Header Section */}
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="mb-16 text-center"
+      >
+        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+          My Projects
+        </h1>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Explore my portfolio of projects showcasing my skills and experience in web development, 
+          mobile applications, and UI/UX design.
+        </p>
+      </motion.div>
 
+      {/* Projects Grid */}
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      ) : filteredProjects.length === 0 ? (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center py-20"
+        >
+          <div className="inline-block p-6 rounded-2xl bg-gray-50 shadow-sm border border-gray-100 mb-6">
+            <svg className="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 className="text-2xl font-bold text-gray-700 mb-3">No projects found</h3>
+          <p className="text-gray-500 mb-6 max-w-md mx-auto">No projects are currently available.</p>
+        </motion.div>
+      ) : (
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"
-          role="list"
-          aria-labelledby="featured-projects"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
         >
-          {projects.map((project) => (
-            <motion.article
-              key={project.id}
-              variants={itemVariants}
-              whileHover="hover"
-              className="group relative"
-              role="listitem"
-            >
+          <AnimatePresence>
+            {filteredProjects.map(project => (
               <motion.div
-                variants={cardHoverVariants}
-                className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl overflow-hidden border border-white/20 relative"
+                key={project.id}
+                variants={projectVariants}
+                whileHover="hover"
+                whileTap="tap"
+                layout
+                className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full border border-gray-100"
               >
-                {/* Card Header with Image */}
-                <div className="relative h-64 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10"></div>
-                   {/* Overlay with action buttons */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-8">
-                    <div className="flex gap-4">
-                      {project.github && (
-                        <motion.a 
-                          href={project.github} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-white/90 backdrop-blur-sm text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          aria-label={`View source code for ${project.name} on GitHub`}
-                        >
-                          <FaCode className="w-4 h-4" aria-hidden="true" />
-                          Code
-                        </motion.a>
-                      )}
-                      {project.link && (
-                        <motion.a 
-                          href={project.link} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 hover:scale-105 transition-all duration-300 shadow-lg"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          aria-label={`Visit live demo of ${project.name}`}
-                        >
-                          <FaRocket className="w-4 h-4" aria-hidden="true" />
-                          Live Demo
-                        </motion.a>
-                      )}
+                {/* Project Image */}
+                <div className="relative overflow-hidden h-56">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  />
+                  {project.featured && (
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
+                      Featured
                     </div>
+                  )}
+                </div>
+                
+                {/* Project Content */}
+                <div className="p-8 flex-grow">
+                  <h3 className="text-2xl font-bold mb-3 text-gray-800 hover:text-purple-600 transition-colors">{project.title}</h3>
+                  <p className="text-gray-600 mb-5 leading-relaxed">{project.description}</p>
+                  
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {project.technologies.map(tech => (
+                      <div 
+                        key={tech} 
+                        className="flex items-center gap-1.5 bg-gray-50 px-4 py-1.5 rounded-lg text-xs font-medium text-gray-700 border border-gray-100 hover:border-purple-200 transition-colors"
+                      >
+                        {techIcons[tech]}
+                        <span>{tech.charAt(0).toUpperCase() + tech.slice(1)}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-
-                {/* Card Content */}
-                <div className="p-8">
-                  {/* Project Header */}
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl">
-                        <FaLaptopCode className="w-5 h-5 text-white" aria-hidden="true" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                          {project.name}
-                        </h3>
-                        <span className="text-sm text-gray-500 font-medium">{project.category}</span>
-                      </div>
-                    </div>
-                    
-                    {/* Status Badge */}
-                    <span className={`flex items-center gap-2 text-xs px-3 py-1.5 rounded-full font-semibold ${
-                      project.status === 'Live' 
-                        ? 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200' 
-                        : project.status === 'In Development' 
-                        ? 'bg-amber-100 text-amber-700 ring-1 ring-amber-200' 
-                        : 'bg-blue-100 text-blue-700 ring-1 ring-blue-200'
-                    }`}
-                    role="status"
-                    aria-label={`Project status: ${project.status}`}
+                
+                {/* Project Links */}
+                <div className="px-8 pb-8 pt-0 mt-auto">
+                  <div className="flex gap-4">
+                    <a 
+                      href={project.githubUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors shadow-sm hover:shadow-md flex-1 justify-center"
                     >
-                      <FaStar className={`w-3 h-3 ${
-                        project.status === 'Live' 
-                          ? 'text-emerald-600' 
-                          : project.status === 'In Development' 
-                          ? 'text-amber-600' 
-                          : 'text-blue-600'
-                      }`} 
-                      aria-hidden="true" 
-                      />
-                      {project.status}
-                    </span>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-gray-600 mb-6 leading-relaxed text-base line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
-                    {project.description}
-                  </p>
-
-                  {/* Features */}
-                  <div className="mb-6" role="list" aria-label="Project features">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">Key Features</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.features.map((feature, i) => (
-                        <span 
-                          key={i}
-                          className="inline-flex items-center gap-1.5 text-xs bg-gradient-to-r from-emerald-50 to-green-50 text-emerald-700 px-3 py-1.5 rounded-full font-medium ring-1 ring-emerald-200 hover:ring-2 hover:ring-emerald-300 transition-all duration-300"
-                          role="listitem"
-                        >
-                          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" aria-hidden="true"></span>
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Technologies */}
-                  <div role="list" aria-label="Technologies used">
-                    <h4 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">Technologies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech, i) => (
-                        <span 
-                          key={i}
-                          className="px-3 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 rounded-full text-xs font-semibold ring-1 ring-blue-200 hover:ring-2 hover:ring-blue-300 hover:scale-105 transform transition-all duration-300"
-                          role="listitem"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                      <FaGithub className="text-lg" />
+                      <span>Code</span>
+                    </a>
+                    {project.liveUrl ? (
+                      <a 
+                        href={project.liveUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg hover:from-purple-700 hover:to-pink-600 transition-colors shadow-sm hover:shadow-md flex-1 justify-center"
+                      >
+                        <FaExternalLinkAlt className="text-lg" />
+                        <span>Live Demo</span>
+                      </a>
+                    ) : (
+                      <span className="flex items-center gap-2 px-5 py-2.5 bg-gray-200 text-gray-500 rounded-lg flex-1 justify-center cursor-not-allowed">
+                        <FaExternalLinkAlt className="text-lg" />
+                        <span>No Demo</span>
+                      </span>
+                    )}
                   </div>
                 </div>
               </motion.div>
-            </motion.article>
-          ))}
+            ))}
+          </AnimatePresence>
         </motion.div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-center mt-16"
-        >
-          <a 
-            href="https://github.com/romarmendones" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            <FaGithub className="w-5 h-5" />
-            View More on GitHub
-          </a>
-        </motion.div>
-      </div>
-    </motion.section>
+      )}
+    </div>
   );
 };
 
