@@ -17,7 +17,9 @@ const Projects = () => {
     supabase: <SiSupabase className="text-emerald-500" />,
     firebase: <SiFirebase className="text-amber-500" />,
     mongodb: <SiMongodb className="text-green-600" />,
-    express: <SiExpress className="text-gray-600" />
+    express: <SiExpress className="text-gray-600" />,
+    Vue : <SiMongodb className="text-green-600" />,
+    Javascripts : <SiMongodb className="text-yellow-600" />,  
   };
 
   // Sample projects data
@@ -38,7 +40,7 @@ const Projects = () => {
       title: 'coffee-brew-bean-shop',  
       description: 'A coffee shop website with a modern design, showcasing various coffee products and providing an easy-to-navigate user experience.',
       image: require('../image/Profile.jpg'),   
-      technologies: ['react', 'typescript', 'firebase'],
+      technologies: ['Vue', 'Javascripts', 'firebase'],
       githubUrl: ' https://github.com/romarmendones/coffee-Brew-Bean-Shop',
       liveUrl: 'https://coffee-brew-bean-shop.vercel.app/',
       featured: false
