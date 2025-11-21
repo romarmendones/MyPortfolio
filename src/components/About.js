@@ -42,6 +42,7 @@ const About = () => {
     { 
       name: 'Laravel', 
       icon: <SiLaravel className="object-contain w-full h-full" />,
+      
       delay: 0.4,
       color: 'from-red-500 to-red-600'
     },
@@ -76,6 +77,37 @@ const About = () => {
       color: 'from-teal-500 to-teal-600'
     }
   ], []);
+  
+  // Custom arrow components for accessibility and proper click handling
+  const NextArrow = ({ className, style, onClick }) => (
+    <motion.button
+      aria-label="Next slide"
+      whileHover={{ scale: 1.05, rotate: 5 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={onClick}
+      className="absolute right-0 z-10 flex items-center justify-center w-12 h-12 text-white transition-all duration-300 -translate-y-1/2 rounded-full shadow-lg slick-custom-arrow next-arrow top-1/2 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 hover:shadow-xl"
+      style={style}
+    >
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </motion.button>
+  );
+
+  const PrevArrow = ({ className, style, onClick }) => (
+    <motion.button
+      aria-label="Previous slide"
+      whileHover={{ scale: 1.05, rotate: -5 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={onClick}
+      className="absolute left-0 z-10 flex items-center justify-center w-12 h-12 text-white transition-all duration-300 -translate-y-1/2 rounded-full shadow-lg slick-custom-arrow prev-arrow top-1/2 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 hover:shadow-xl"
+      style={style}
+    >
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+      </svg>
+    </motion.button>
+  );
 
   // Slick slider settings
   const sliderSettings = useMemo(() => ({
@@ -124,42 +156,8 @@ const About = () => {
         }`}
       />
     ),
-    nextArrow: (
-      <motion.div
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        whileTap={{ scale: 0.9 }}
-        className="absolute z-10 flex items-center justify-center text-white transition-all duration-300 -translate-y-1/2 border rounded-full shadow-lg top-1/2 -right-6 w-14 h-14 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 hover:shadow-xl"
-      >
-        <motion.svg 
-          className="w-7 h-7" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-          animate={{ x: [0, 2, 0] }}
-          transition={{ duration: 1, repeat: Infinity }}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </motion.svg>
-      </motion.div>
-    ),
-    prevArrow: (
-      <motion.div
-        whileHover={{ scale: 1.1, rotate: -5 }}
-        whileTap={{ scale: 0.9 }}
-        className="absolute z-10 flex items-center justify-center text-white transition-all duration-300 -translate-y-1/2 border rounded-full shadow-lg top-1/2 -left-6 w-14 h-14 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 hover:shadow-xl"
-      >
-        <motion.svg 
-          className="w-7 h-7" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-          animate={{ x: [0, -2, 0] }}
-          transition={{ duration: 1, repeat: Infinity }}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </motion.svg>
-      </motion.div>
-    )
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />
   }), [currentSlide]);
 
   const profileVariants = useMemo(() => ({
@@ -566,37 +564,56 @@ const About = () => {
       {/* Custom CSS for Slick Slider */}
       <style jsx>{`
         .slick-slider {
-          margin: 0 -4px sm:margin: 0 -8px;
+          margin: 0 -4px;
         }
+        @media (min-width: 640px) {
+          .slick-slider { margin: 0 -8px; }
+        }
+
         .slick-slide {
-          padding: 0 4px sm:padding: 0 8px;
+          padding: 0 4px;
         }
+        @media (min-width: 640px) {
+          .slick-slide { padding: 0 8px; }
+        }
+
+        /* center slide inner content */
+        .slick-slide > div { display: flex; justify-content: center; align-items: center; }
+
         .slick-dots {
-          bottom: -30px sm:bottom: -40px;
+          bottom: -30px;
+          display: flex;
+          gap: 8px;
+          justify-content: center;
         }
+        @media (min-width: 640px) {
+          .slick-dots { bottom: -40px; }
+        }
+
         .slick-dots li button:before {
           color: rgba(156, 163, 175, 0.5);
-          font-size: 10px sm:font-size: 12px;
+          font-size: 10px;
+          opacity: 1;
+        }
+        @media (min-width: 640px) {
+          .slick-dots li button:before { font-size: 12px; }
         }
         .slick-dots li.slick-active button:before {
           color: #06b6d4;
+          transform: scale(1.15);
+          box-shadow: 0 6px 18px rgba(6,182,212,0.12);
         }
-        .slick-prev, .slick-next {
-          width: 40px sm:width: 56px;
-          height: 40px sm:height: 56px;
-          z-index: 10;
+
+        /* make custom arrows consistent and slightly offset outside the card */
+        .slick-custom-arrow { border: none; background: transparent; }
+        .prev-arrow { left: -18px; }
+        .next-arrow { right: -18px; }
+        @media (min-width: 640px) {
+          .prev-arrow { left: -26px; }
+          .next-arrow { right: -26px; }
         }
-        .slick-prev:before, .slick-next:before {
-          display: none;
-        }
-        @media (max-width: 640px) {
-          .slick-prev {
-            left: -10px;
-          }
-          .slick-next {
-            right: -10px;
-          }
-        }
+
+        .slick-prev:before, .slick-next:before { display: none; }
       `}</style>
     </motion.section>
   );
