@@ -128,7 +128,7 @@ const About = () => {
       <motion.div
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
-        className="absolute z-10 -translate-y-1/2 top-1/2 -right-6 w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm shadow-lg border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:shadow-xl transition-all duration-300"
+        className="absolute z-10 flex items-center justify-center text-white transition-all duration-300 -translate-y-1/2 border rounded-full shadow-lg top-1/2 -right-6 w-14 h-14 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 hover:shadow-xl"
       >
         <motion.svg 
           className="w-7 h-7" 
@@ -146,7 +146,7 @@ const About = () => {
       <motion.div
         whileHover={{ scale: 1.1, rotate: -5 }}
         whileTap={{ scale: 0.9 }}
-        className="absolute z-10 -translate-y-1/2 top-1/2 -left-6 w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm shadow-lg border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:shadow-xl transition-all duration-300"
+        className="absolute z-10 flex items-center justify-center text-white transition-all duration-300 -translate-y-1/2 border rounded-full shadow-lg top-1/2 -left-6 w-14 h-14 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 hover:shadow-xl"
       >
         <motion.svg 
           className="w-7 h-7" 
@@ -271,7 +271,7 @@ const About = () => {
     <motion.section 
       initial="initial"
       animate="animate"
-      className="relative flex items-center min-h-screen py-12 sm:py-16 md:py-20 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+      className="relative flex items-center min-h-screen py-12 overflow-hidden sm:py-16 md:py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
       role="region"
       aria-label="About section"
     >
@@ -360,7 +360,7 @@ const About = () => {
             className="relative flex-shrink-0 group"
           >
             <motion.div 
-              className="relative overflow-hidden shadow-2xl w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 2xl:w-96 2xl:h-96 rounded-3xl"
+              className="relative w-48 h-48 overflow-hidden shadow-2xl sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 2xl:w-96 2xl:h-96 rounded-3xl"
               whileHover={{ scale: 1.02 }}
             >
               <img
@@ -384,7 +384,7 @@ const About = () => {
               animate={{ scale: 1, rotate: 0, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8, type: "spring", stiffness: 200 }}
               whileHover={{ scale: 1.1, rotate: 5 }}
-              className="absolute px-4 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm font-bold text-white border-2 rounded-full shadow-2xl -top-2 -right-2 sm:-top-4 sm:-right-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 border-white/20"
+              className="absolute px-4 py-2 text-xs font-bold text-white border-2 rounded-full shadow-2xl sm:px-6 sm:py-3 sm:text-sm -top-2 -right-2 sm:-top-4 sm:-right-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 border-white/20"
             >
               <motion.span
                 animate={{ opacity: [1, 0.7, 1] }}
@@ -417,7 +417,7 @@ const About = () => {
                 key={i}
                 variants={floatingVariants}
                 animate="animate"
-                className="absolute w-2 h-2 bg-cyan-400 rounded-full opacity-60"
+                className="absolute w-2 h-2 rounded-full bg-cyan-400 opacity-60"
                 style={{
                   left: `${20 + i * 30}%`,
                   top: `${10 + i * 20}%`,
@@ -439,7 +439,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2, duration: 0.8 }}
-                className="mb-6 sm:mb-8 text-lg sm:text-xl lg:text-2xl font-light leading-relaxed text-gray-300"
+                className="mb-6 text-lg font-light leading-relaxed text-gray-300 sm:mb-8 sm:text-xl lg:text-2xl"
               >
              
               </motion.div>
@@ -448,7 +448,7 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.4, duration: 0.8 }}
-                className="mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed text-gray-400"
+                className="mb-6 text-base leading-relaxed text-gray-400 sm:mb-8 sm:text-lg"
               >
               
               </motion.p>
@@ -458,15 +458,15 @@ const About = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.6, duration: 0.8 }}
-                className="flex mb-6 sm:mb-8 space-x-3 sm:space-x-4"
+                className="flex mb-6 space-x-3 sm:mb-8 sm:space-x-4"
               >
                 <motion.a
                   href="https://github.com"
-                  target="_blank"
+                  target="https://github.com/romarmendones?tab=repositories"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 text-gray-300 transition-all duration-300 bg-gray-800 shadow-lg hover:bg-gray-700 rounded-xl hover:text-white hover:shadow-xl"
+                  className="flex items-center justify-center w-10 h-10 text-gray-300 transition-all duration-300 bg-gray-800 shadow-lg sm:w-12 sm:h-12 hover:bg-gray-700 rounded-xl hover:text-white hover:shadow-xl"
                 >
                   <motion.div
                     animate={{ rotate: [0, 360] }}
@@ -481,15 +481,17 @@ const About = () => {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2, rotate: -5 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 text-gray-300 transition-all duration-300 bg-gray-800 shadow-lg hover:bg-gray-700 rounded-xl hover:text-white hover:shadow-xl"
+                  className="flex items-center justify-center w-10 h-10 text-gray-300 transition-all duration-300 bg-gray-800 shadow-lg sm:w-12 sm:h-12 hover:bg-gray-700 rounded-xl hover:text-white hover:shadow-xl"
                 >
                   <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </motion.a>
                 <motion.a
-                  href="mailto:contact@example.com"
+                  href="https://gmail.com"
+                  target="https://romarmendones24@gmail.com"
+                  rel="noopener noreferrer" 
                   whileHover={{ scale: 1.1, y: -2, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 text-white transition-all duration-300 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl hover:shadow-xl"
+                  className="flex items-center justify-center w-10 h-10 text-white transition-all duration-300 shadow-lg sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl hover:shadow-xl"
                 >
                   <motion.div
                     animate={{ scale: [1, 1.1, 1] }}
@@ -507,7 +509,7 @@ const About = () => {
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.8, duration: 0.8 }}
-                className="mb-6 sm:mb-8 text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text"
+                className="mb-6 text-2xl font-bold text-transparent text-white sm:mb-8 sm:text-3xl lg:text-4xl bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text"
               >
                 Technical Expertise
               </motion.h3>
@@ -518,7 +520,7 @@ const About = () => {
               >
                 {/* Enhanced Skills Grid with React Slick */}
                 <motion.div 
-                  className="p-4 sm:p-6 md:p-8 border shadow-2xl bg-white/5 backdrop-blur-xl rounded-3xl border-white/10"
+                  className="p-4 border shadow-2xl sm:p-6 md:p-8 bg-white/5 backdrop-blur-xl rounded-3xl border-white/10"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -530,7 +532,7 @@ const About = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: skill.delay, duration: 0.5 }}
                         whileHover={{ scale: 1.05, y: -8, rotate: 2 }}
-                        className="flex flex-col items-center space-y-3 sm:space-y-4 px-2 sm:px-4 group cursor-pointer"
+                        className="flex flex-col items-center px-2 space-y-3 cursor-pointer sm:space-y-4 sm:px-4 group"
                       >
                         <motion.div
                           animate={{ rotate: [0, 8, 0] }}
@@ -538,14 +540,14 @@ const About = () => {
                           className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-gradient-to-br ${skill.color} rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110`}
                         >
                           <motion.div 
-                            className="flex items-center justify-center w-full h-full p-2 sm:p-3 text-white"
+                            className="flex items-center justify-center w-full h-full p-2 text-white sm:p-3"
                             whileHover={{ scale: 1.1 }}
                           >
                             {skill.icon}
                           </motion.div>
                         </motion.div>
                         <motion.span 
-                          className="text-xs sm:text-sm font-semibold text-center text-gray-300 transition-colors duration-300 group-hover:text-white"
+                          className="text-xs font-semibold text-center text-gray-300 transition-colors duration-300 sm:text-sm group-hover:text-white"
                           animate={{ opacity: [0.7, 1, 0.7] }}
                           transition={{ duration: 2, repeat: Infinity }}
                         >
