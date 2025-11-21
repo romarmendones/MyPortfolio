@@ -32,6 +32,18 @@ const Projects = () => {
       liveUrl: 'https://smart-stacks-manager-web.vercel.app/',
       featured: true
     },
+
+    {
+      id: 2,
+      title: 'coffee-brew-bean-shop',  
+      description: 'A coffee shop website with a modern design, showcasing various coffee products and providing an easy-to-navigate user experience.',
+      image: require('../image/Profile.jpg'),   
+      technologies: ['react', 'typescript', 'firebase'],
+      githubUrl: ' https://github.com/romarmendones/coffee-Brew-Bean-Shop',
+      liveUrl: 'https://coffee-brew-bean-shop.vercel.app/',
+      featured: false
+    },  
+
     
    
     
@@ -85,7 +97,7 @@ const Projects = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-16 max-w-7xl">
+    <div className="container px-4 py-16 mx-auto max-w-7xl">
       {/* Header Section */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
@@ -93,10 +105,10 @@ const Projects = () => {
         transition={{ duration: 0.6 }}
         className="mb-16 text-center"
       >
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+        <h1 className="mb-6 text-5xl font-extrabold text-transparent md:text-6xl bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text">
           My Projects
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        <p className="max-w-3xl mx-auto text-xl leading-relaxed text-gray-600">
           Explore my portfolio of projects showcasing my skills and experience in web development, 
           mobile applications, and UI/UX design.
         </p>
@@ -104,29 +116,29 @@ const Projects = () => {
 
       {/* Projects Grid */}
       {isLoading ? (
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="flex items-center justify-center h-64">
+          <div className="w-16 h-16 border-t-2 border-b-2 border-blue-500 rounded-full animate-spin"></div>
         </div>
       ) : filteredProjects.length === 0 ? (
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center py-20"
+          className="py-20 text-center"
         >
-          <div className="inline-block p-6 rounded-2xl bg-gray-50 shadow-sm border border-gray-100 mb-6">
+          <div className="inline-block p-6 mb-6 border border-gray-100 shadow-sm rounded-2xl bg-gray-50">
             <svg className="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
-          <h3 className="text-2xl font-bold text-gray-700 mb-3">No projects found</h3>
-          <p className="text-gray-500 mb-6 max-w-md mx-auto">No projects are currently available.</p>
+          <h3 className="mb-3 text-2xl font-bold text-gray-700">No projects found</h3>
+          <p className="max-w-md mx-auto mb-6 text-gray-500">No projects are currently available.</p>
         </motion.div>
       ) : (
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence>
             {filteredProjects.map(project => (
@@ -136,14 +148,14 @@ const Projects = () => {
                 whileHover="hover"
                 whileTap="tap"
                 layout
-                className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full border border-gray-100"
+                className="flex flex-col h-full overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl"
               >
                 {/* Project Image */}
-                <div className="relative overflow-hidden h-56">
+                <div className="relative h-56 overflow-hidden">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
                   />
                   {project.featured && (
                     <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
@@ -153,9 +165,9 @@ const Projects = () => {
                 </div>
                 
                 {/* Project Content */}
-                <div className="p-8 flex-grow">
-                  <h3 className="text-2xl font-bold mb-3 text-gray-800 hover:text-purple-600 transition-colors">{project.title}</h3>
-                  <p className="text-gray-600 mb-5 leading-relaxed">{project.description}</p>
+                <div className="flex-grow p-8">
+                  <h3 className="mb-3 text-2xl font-bold text-gray-800 transition-colors hover:text-purple-600">{project.title}</h3>
+                  <p className="mb-5 leading-relaxed text-gray-600">{project.description}</p>
                   
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2 mb-5">
@@ -172,7 +184,7 @@ const Projects = () => {
                 </div>
                 
                 {/* Project Links */}
-                <div className="px-8 pb-8 pt-0 mt-auto">
+                <div className="px-8 pt-0 pb-8 mt-auto">
                   <div className="flex gap-4">
                     <a 
                       href={project.githubUrl} 
