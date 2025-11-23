@@ -28,7 +28,7 @@ const Projects = () => {
       id: 1,
       title: 'SMARTSTOCKS',
       description: 'A full-featured e-commerce platform with product management, cart functionality, and secure payment processing.',
-      image: require('../image/Profile.jpg'),
+      image: require('../image/smartstocks.png'),
       technologies: ['react', 'tailwind', 'supabase'],
       githubUrl: 'https://github.com/romar/smartstocks',
       liveUrl: 'https://smart-stacks-manager-web.vercel.app/',
