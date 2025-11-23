@@ -37,7 +37,7 @@ const Projects = () => {
 
     {
       id: 2,
-      title: 'coffee-brew-bean-shop',  
+      title: 'Coffee Brew-BeanShop',  
       description: 'A coffee shop website with a modern design, showcasing various coffee products and providing an easy-to-navigate user experience.',
       image: require('../image/Profile.jpg'),   
       technologies: ['Vue', 'Javascripts', 'firebase'],
