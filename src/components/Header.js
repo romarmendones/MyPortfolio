@@ -45,7 +45,7 @@ const Header = () => {
       }`}
     >
       {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-pink-900/20 opacity-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/20 via-gray-800/20 to-gray-900/20 opacity-50"></div>
       
       <div className="container mx-auto flex items-center justify-between px-6 lg:px-8 relative z-10">
         {/* Enhanced Logo */}
@@ -59,7 +59,7 @@ const Header = () => {
             <motion.h1 
               className="text-2xl md:text-3xl font-bold tracking-tight"
             >
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent group-hover:from-cyan-300 group-hover:via-blue-400 group-hover:to-purple-500 transition-all duration-500">
+              <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent group-hover:from-gray-100 group-hover:via-white group-hover:to-gray-100 transition-all duration-500">
                 My Portfolio
               </span>
             </motion.h1>
@@ -104,7 +104,7 @@ const Header = () => {
               {location.pathname === item.href && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-600/20 rounded-xl border border-cyan-400/30"
+                  className="absolute inset-0 bg-gradient-to-r from-white/10 to-gray-400/10 rounded-xl border border-white/20"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
@@ -112,7 +112,7 @@ const Header = () => {
               )}
               
               {/* Hover glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-purple-600/0 to-pink-400/0 rounded-xl group-hover:from-cyan-400/10 group-hover:via-purple-600/10 group-hover:to-pink-400/10 transition-all duration-500 opacity-0 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-gray-300/0 to-gray-400/0 rounded-xl group-hover:from-white/5 group-hover:via-gray-300/5 group-hover:to-gray-400/5 transition-all duration-500 opacity-0 group-hover:opacity-100" />
             </motion.button>
           ))}
         </nav>
@@ -171,10 +171,10 @@ const Header = () => {
                       <span className="text-2xl opacity-80">{item.icon}</span>
                       <span className="font-medium">{item.title}</span>
                       {location.pathname === item.href && (
-                        <motion.div
-                          layoutId="mobileActiveTab"
-                          className="ml-auto w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full"
-                        />
+                      <motion.div
+                        layoutId="mobileActiveTab"
+                        className="ml-auto w-2 h-2 bg-gradient-to-r from-white to-gray-300 rounded-full"
+                      />
                       )}
                     </motion.button>
                   ))}

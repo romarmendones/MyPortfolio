@@ -12,6 +12,14 @@
     @apply overflow-x-hidden;
   }
 
+  :root {
+    --bg: #000000; /* black background */
+    --text: #ffffff; /* white text */
+    --muted: #9ca3af; /* gray for subtle text */
+    --accent: #ffffff; /* accent (for buttons/links) */
+    --panel: #0b0b0b; /* slightly lighter than full black for panels */
+  }
+
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -19,19 +27,22 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply bg-gray-50 text-gray-900 antialiased min-h-screen;
+    background-color: var(--bg);
+    color: var(--text);
+    @apply min-h-screen antialiased;
   }
 
   ::selection {
-    @apply bg-blue-500/70 text-white;
+    background: var(--text);
+    color: var(--bg);
   }
 
   :focus {
-    @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-gray-50;
+    @apply outline-none ring-2 ring-white ring-offset-2;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-blue-500;
+    @apply outline-none ring-2 ring-white;
   }
 
   /* Improved scrollbar styling */
@@ -40,34 +51,58 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100;
+    background: #0a0a0a;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+    background: #303030;
+    border-radius: 9999px;
+    transition: background-color 0.2s;
   }
 }
 
 /* Custom component styles */
 @layer components {
   .container {
-    @apply px-4 mx-auto max-w-7xl w-full relative;
+    @apply relative w-full px-4 mx-auto max-w-7xl;
   }
   
   .section {
-    @apply py-16 md:py-24 w-full scroll-mt-16;
+    @apply w-full py-16 md:py-24 scroll-mt-16;
   }
 
   .btn {
-    @apply px-4 py-2 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:ring-offset-2;
+    @apply px-4 py-2 transition-all duration-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-primary {
-    @apply bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md;
+    background-color: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    transition: background-color 0.15s, box-shadow 0.15s;
+  }
+
+  .btn-primary:hover {
+    background-color: #f2f2f2;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.45);
+  }
+
+  .btn-primary:active {
+    background-color: #e6e6e6;
   }
 
   .input {
-    @apply px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 transition-all duration-200;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--panel);
+    color: var(--text);
+    border: 1px solid #303030;
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--text);
   }
 
   /* Horizontal scroll utilities */
@@ -95,7 +130,14 @@
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-  @apply bg-gray-100 px-2 py-1 rounded text-sm border border-gray-200 whitespace-pre-wrap break-words;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--text);
+  color: var(--bg);
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
 }
 
 /* Enhanced animations */
@@ -147,35 +189,37 @@ code {
 /* Responsive utilities with improved spacing */
 @screen md {
   .container {
-    @apply px-6 relative;
+    @apply relative px-6;
   }
 }
 
 @screen lg {
   .container {
-    @apply px-8 relative;
+    @apply relative px-8;
   }
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   body {
-    @apply bg-gray-900 text-gray-100;
+    background-color: var(--bg);
+    color: var(--text);
   }
 
   code {
-    @apply bg-gray-800 border-gray-700 text-gray-100;
+    background: var(--text);
+    color: var(--bg);
   }
 
   :focus {
-    @apply ring-offset-gray-900;
+    @apply ring-offset-black;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-800;
+    background: #0a0a0a;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-600 hover:bg-gray-500;
+    background: #303030;
   }
 }

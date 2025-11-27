@@ -149,10 +149,10 @@ const About = () => {
       <motion.div
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}
-        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
           i === currentSlide
-            ? 'bg-gradient-to-r from-cyan-400 to-blue-500 shadow-md'
-            : 'bg-gray-600 hover:bg-gray-500'
+            ? 'bg-gradient-to-r from-white to-gray-300 shadow-md'
+            : 'bg-gray-700 hover:bg-gray-600'
         }`}
       />
     ),
@@ -234,18 +234,6 @@ const About = () => {
     }
   }), []);
 
-  const pulseVariants = useMemo(() => ({
-    animate: {
-      scale: [1, 1.05, 1],
-      opacity: [0.7, 1, 0.7],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  }), []);
-
   const renderAnimatedText = (text, className) => {
     return (
       <motion.div className={className}>
@@ -269,7 +257,7 @@ const About = () => {
     <motion.section 
       initial="initial"
       animate="animate"
-      className="relative flex items-center min-h-screen py-12 overflow-hidden sm:py-16 md:py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+      className="relative flex items-center min-h-screen py-12 overflow-hidden sm:py-16 md:py-20 bg-gradient-to-br from-black via-gray-900 to-black"
       role="region"
       aria-label="About section"
     >
@@ -285,7 +273,7 @@ const About = () => {
             y: [0, -50, 0],
             transition: { duration: 15, repeat: Infinity, ease: "easeInOut" }
           }}
-          className="absolute rounded-full -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-500/20 to-purple-600/20 blur-3xl"
+          className="absolute rounded-full -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-gray-700/20 to-gray-600/20 blur-3xl"
         ></motion.div>
         <motion.div 
           animate={{
@@ -293,7 +281,7 @@ const About = () => {
             y: [0, 50, 0],
             transition: { duration: 18, repeat: Infinity, ease: "easeInOut" }
           }}
-          className="absolute rounded-full -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-emerald-500/20 to-cyan-600/20 blur-3xl"
+          className="absolute rounded-full -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-gray-700/20 to-gray-600/20 blur-3xl"
         ></motion.div>
         <motion.div 
           animate={{
@@ -301,7 +289,7 @@ const About = () => {
             y: [0, -100, 0],
             transition: { duration: 12, repeat: Infinity, ease: "easeInOut" }
           }}
-          className="absolute w-64 h-64 rounded-full top-1/2 left-1/2 bg-gradient-to-br from-pink-500/15 to-rose-600/15 blur-3xl"
+          className="absolute w-64 h-64 rounded-full top-1/2 left-1/2 bg-gradient-to-br from-gray-700/15 to-gray-600/15 blur-3xl"
         ></motion.div>
       </motion.div>
 
@@ -310,7 +298,7 @@ const About = () => {
         {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 rounded-full bg-white/30"
+            className="absolute w-1 h-1 rounded-full bg-gray-400/30"
             animate={{
               x: [0, 120, 0],
               y: [0, -120, 0],
@@ -376,32 +364,11 @@ const About = () => {
               />
             </motion.div>
             
-            {/* Enhanced floating badge with pulse animation */}
-            <motion.div
-              initial={{ scale: 0, rotate: -180, y: 50 }}
-              animate={{ scale: 1, rotate: 0, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8, type: "spring", stiffness: 200 }}
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              className="absolute px-4 py-2 text-xs font-bold text-white border-2 rounded-full shadow-2xl sm:px-6 sm:py-3 sm:text-sm -top-2 -right-2 sm:-top-4 sm:-right-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 border-white/20"
-            >
-              <motion.span
-                animate={{ opacity: [1, 0.7, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="flex items-center gap-1 sm:gap-2"
-              >
-                <motion.div 
-                  variants={pulseVariants}
-                  animate="animate"
-                  className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"
-                ></motion.div>
-                <span className="hidden sm:inline">Available for hire</span>
-                <span className="sm:hidden">Hire me</span>
-              </motion.span>
-            </motion.div>
+            {/* Availability badge removed per request */}
 
             {/* Enhanced glow effect with animation */}
             <motion.div
-              className="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-600/20 blur-2xl -z-10"
+              className="absolute inset-0 rounded-3xl bg-gradient-to-r from-white/20 via-gray-300/20 to-gray-500/20 blur-2xl -z-10"
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.3, 0.6, 0.3],
@@ -415,7 +382,7 @@ const About = () => {
                 key={i}
                 variants={floatingVariants}
                 animate="animate"
-                className="absolute w-2 h-2 rounded-full bg-cyan-400 opacity-60"
+                className="absolute w-2 h-2 bg-white rounded-full opacity-60"
                 style={{
                   left: `${20 + i * 30}%`,
                   top: `${10 + i * 20}%`,
@@ -459,12 +426,12 @@ const About = () => {
                 className="flex mb-6 space-x-3 sm:mb-8 sm:space-x-4"
               >
                 <motion.a
-                  href="https://github.com"
-                  target="https://github.com/romarmendones"
+                  href="https://github.com/romarmendones"
+                  target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center w-10 h-10 text-gray-300 transition-all duration-300 bg-gray-800 shadow-lg sm:w-12 sm:h-12 hover:bg-gray-700 rounded-xl hover:text-white hover:shadow-xl"
+                  className="flex items-center justify-center w-10 h-10 text-white transition-all duration-300 bg-gray-700 shadow-lg sm:w-12 sm:h-12 hover:bg-gray-600 rounded-xl hover:text-white hover:shadow-xl"
                 >
                   <motion.div
                     animate={{ rotate: [0, 360] }}
@@ -479,17 +446,17 @@ const About = () => {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2, rotate: -5 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center w-10 h-10 text-gray-300 transition-all duration-300 bg-gray-800 shadow-lg sm:w-12 sm:h-12 hover:bg-gray-700 rounded-xl hover:text-white hover:shadow-xl"
+                  className="flex items-center justify-center w-10 h-10 text-white transition-all duration-300 bg-gray-700 shadow-lg sm:w-12 sm:h-12 hover:bg-gray-600 rounded-xl hover:text-white hover:shadow-xl"
                 >
                   <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </motion.a>
                 <motion.a
-                  href="https://gmail.com"
-                  target="https://romarmendones24@gmail.com"
+                  href="mailto:romarmendones24@gmail.com"
+                  target="_blank"
                   rel="noopener noreferrer" 
                   whileHover={{ scale: 1.1, y: -2, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center justify-center w-10 h-10 text-white transition-all duration-300 shadow-lg sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl hover:shadow-xl"
+                  className="flex items-center justify-center w-10 h-10 text-black transition-all duration-300 shadow-lg sm:w-12 sm:h-12 bg-gradient-to-r from-white to-gray-300 rounded-xl hover:shadow-xl"
                 >
                   <motion.div
                     animate={{ scale: [1, 1.1, 1] }}
@@ -507,7 +474,7 @@ const About = () => {
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.8, duration: 0.8 }}
-                className="mb-6 text-2xl font-bold text-transparent text-white sm:mb-8 sm:text-3xl lg:text-4xl bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text"
+              className="text-2xl font-bold text-transparent text-white sm:mb-8 sm:text-3xl lg:text-4xl bg-gradient-to-r from-white to-gray-300 bg-clip-text"
               >
                 Technical Expertise
               </motion.h3>
@@ -535,7 +502,7 @@ const About = () => {
                         <motion.div
                           animate={{ rotate: [0, 8, 0] }}
                           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                          className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-gradient-to-br ${skill.color} rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110`}
+                          className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-600 rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110`}
                         >
                           <motion.div 
                             className="flex items-center justify-center w-full h-full p-2 text-white sm:p-3"
@@ -562,7 +529,7 @@ const About = () => {
       </div>
 
       {/* Custom CSS for Slick Slider */}
-      <style jsx>{`
+      <style>{`
         .slick-slider {
           margin: 0 -4px;
         }

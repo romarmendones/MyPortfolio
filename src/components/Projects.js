@@ -107,10 +107,10 @@ const Projects = () => {
         transition={{ duration: 0.6 }}
         className="mb-16 text-center"
       >
-        <h1 className="mb-6 text-5xl font-extrabold text-transparent md:text-6xl bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text">
+        <h1 className="mb-6 text-5xl font-extrabold text-white md:text-6xl">
           My Projects
         </h1>
-        <p className="max-w-3xl mx-auto text-xl leading-relaxed text-gray-600">
+        <p className="max-w-3xl mx-auto text-xl leading-relaxed text-gray-400">
           Explore my portfolio of projects showcasing my skills and experience in web development, 
           mobile applications, and UI/UX design.
         </p>
@@ -150,7 +150,7 @@ const Projects = () => {
                 whileHover="hover"
                 whileTap="tap"
                 layout
-                className="flex flex-col h-full overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-xl rounded-2xl hover:shadow-2xl"
+                className="flex flex-col h-full overflow-hidden transition-all duration-300 bg-gray-900 border border-gray-800 shadow-xl rounded-2xl hover:shadow-2xl"
               >
                 {/* Project Image */}
                 <div className="relative h-56 overflow-hidden">
@@ -160,7 +160,7 @@ const Projects = () => {
                     className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
                   />
                   {project.featured && (
-                    <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-white to-gray-300 text-black text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
                       Featured
                     </div>
                   )}
@@ -168,15 +168,15 @@ const Projects = () => {
                 
                 {/* Project Content */}
                 <div className="flex-grow p-8">
-                  <h3 className="mb-3 text-2xl font-bold text-gray-800 transition-colors hover:text-purple-600">{project.title}</h3>
-                  <p className="mb-5 leading-relaxed text-gray-600">{project.description}</p>
+                  <h3 className="mb-3 text-2xl font-bold text-white transition-colors hover:text-gray-200">{project.title}</h3>
+                  <p className="mb-5 leading-relaxed text-gray-300">{project.description}</p>
                   
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2 mb-5">
                     {project.technologies.map(tech => (
                       <div 
                         key={tech} 
-                        className="flex items-center gap-1.5 bg-gray-50 px-4 py-1.5 rounded-lg text-xs font-medium text-gray-700 border border-gray-100 hover:border-purple-200 transition-colors"
+                        className="flex items-center gap-1.5 bg-gray-800 px-4 py-1.5 rounded-lg text-xs font-medium text-gray-200 border border-gray-700 hover:border-gray-600 transition-colors"
                       >
                         {techIcons[tech]}
                         <span>{tech.charAt(0).toUpperCase() + tech.slice(1)}</span>
@@ -192,7 +192,7 @@ const Projects = () => {
                       href={project.githubUrl} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-5 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors shadow-sm hover:shadow-md flex-1 justify-center"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors shadow-sm hover:shadow-md flex-1 justify-center"
                     >
                       <FaGithub className="text-lg" />
                       <span>Code</span>
@@ -202,13 +202,13 @@ const Projects = () => {
                         href={project.liveUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg hover:from-purple-700 hover:to-pink-600 transition-colors shadow-sm hover:shadow-md flex-1 justify-center"
+                        className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-white to-gray-300 text-black rounded-lg hover:from-gray-100 hover:to-gray-200 transition-colors shadow-sm hover:shadow-md flex-1 justify-center"
                       >
                         <FaExternalLinkAlt className="text-lg" />
                         <span>Live Demo</span>
                       </a>
                     ) : (
-                      <span className="flex items-center gap-2 px-5 py-2.5 bg-gray-200 text-gray-500 rounded-lg flex-1 justify-center cursor-not-allowed">
+                      <span className="flex items-center gap-2 px-5 py-2.5 bg-gray-700 text-gray-400 rounded-lg flex-1 justify-center cursor-not-allowed">
                         <FaExternalLinkAlt className="text-lg" />
                         <span>No Demo</span>
                       </span>

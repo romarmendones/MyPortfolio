@@ -72,10 +72,10 @@ const Experience = () => {
   };
 
   return (
-    <section className="py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden min-h-screen">
+    <section className="py-32 bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden min-h-screen">
       {/* Modern background with subtle patterns */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-purple-500/3 to-pink-500/3"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-700/3 via-gray-600/3 to-gray-700/3"></div>
         <div className="absolute inset-0" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
         }}></div>
@@ -91,7 +91,7 @@ const Experience = () => {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-2xl"
+          className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-gray-600/10 to-gray-500/10 rounded-full blur-2xl"
         ></motion.div>
         
         <motion.div 
@@ -105,7 +105,7 @@ const Experience = () => {
             ease: "easeInOut",
             delay: 2
           }}
-          className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-purple-500/8 to-pink-500/8 rounded-full blur-2xl"
+          className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-gray-700/8 to-gray-600/8 rounded-full blur-2xl"
         ></motion.div>
       </div>
       
@@ -123,7 +123,7 @@ const Experience = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="inline-block mb-6"
           >
-            <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
+            <div className="w-16 h-1 bg-gradient-to-r from-gray-400 to-gray-300 rounded-full"></div>
           </motion.div>
           
           <h2 className="text-6xl font-bold text-white mb-8 tracking-tight leading-tight">
@@ -150,7 +150,7 @@ const Experience = () => {
             >
               {/* Modern timeline connector */}
               {index < experiences.length - 1 && (
-                <div className="absolute left-8 top-32 w-0.5 h-20 bg-gradient-to-b from-blue-400 to-purple-400 opacity-60"></div>
+                <div className="absolute left-8 top-32 w-0.5 h-20 bg-gradient-to-b from-gray-400 to-gray-300 opacity-60"></div>
               )}
               
               <motion.div
@@ -159,7 +159,7 @@ const Experience = () => {
                 className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl shadow-xl hover:shadow-2xl hover:border-white/20 transition-all duration-500 relative overflow-hidden"
               >
                 {/* Subtle card background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/5 via-gray-600/5 to-gray-700/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 <div className="flex flex-col lg:flex-row items-start gap-8 relative z-10">
                   {/* Modern timeline indicator */}
@@ -170,10 +170,10 @@ const Experience = () => {
                         rotate: 5
                       }}
                       transition={{ duration: 0.3 }}
-                      className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 transition-all duration-500"
+                      className="w-16 h-16 bg-gradient-to-br from-gray-600 to-gray-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-gray-600/25 transition-all duration-500"
                     >
                       <div className="w-8 h-8 bg-white rounded-lg shadow-inner flex items-center justify-center">
-                        <div className="w-4 h-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-md"></div>
+                        <div className="w-4 h-4 bg-gradient-to-br from-gray-600 to-gray-500 rounded-md"></div>
                       </div>
                     </motion.div>
                   </div>
@@ -184,15 +184,15 @@ const Experience = () => {
                         <motion.h3 
                           whileHover={{ x: 5 }}
                           transition={{ duration: 0.3 }}
-                          className="text-3xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300"
+                          className="text-3xl font-bold text-white mb-2 group-hover:text-gray-200 transition-colors duration-300"
                         >
                           {exp.title}
                         </motion.h3>
-                        <p className="text-lg text-slate-300 font-medium">{exp.company}</p>
+                        <p className="text-lg text-gray-300 font-medium">{exp.company}</p>
                       </div>
                       <motion.span 
                         whileHover={{ scale: 1.02 }}
-                        className="text-slate-200 font-semibold bg-white/8 backdrop-blur-sm px-4 py-2 rounded-xl text-sm border border-white/20 hover:bg-white/15 transition-all duration-300"
+                        className="text-gray-200 font-semibold bg-white/8 backdrop-blur-sm px-4 py-2 rounded-xl text-sm border border-white/20 hover:bg-white/15 transition-all duration-300"
                       >
                         {exp.duration}
                       </motion.span>
@@ -206,14 +206,14 @@ const Experience = () => {
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ delay: i * 0.1, duration: 0.6 }}
                           whileHover={{ x: 5 }}
-                          className="flex items-start gap-4 text-slate-300 leading-relaxed group/item"
+                          className="flex items-start gap-4 text-gray-300 leading-relaxed group/item"
                         >
                           <motion.div 
                             whileHover={{ scale: 1.1 }}
                             transition={{ duration: 0.2 }}
-                            className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mt-2 flex-shrink-0"
+                            className="w-2 h-2 bg-gradient-to-r from-gray-400 to-gray-300 rounded-full mt-2 flex-shrink-0"
                           ></motion.div>
-                          <span className="text-base font-light group-hover/item:text-blue-200 transition-colors duration-300">{item}</span>
+                          <span className="text-base font-light group-hover/item:text-gray-100 transition-colors duration-300">{item}</span>
                         </motion.li>
                       ))}
                     </ul>
@@ -229,7 +229,7 @@ const Experience = () => {
                             scale: 1.05, 
                             y: -2
                           }}
-                          className="px-4 py-2 bg-gradient-to-r from-blue-500/15 to-purple-500/15 text-blue-200 rounded-lg text-sm font-medium border border-blue-400/20 hover:from-blue-500/25 hover:to-purple-500/25 hover:border-blue-400/30 transition-all duration-300 backdrop-blur-sm"
+                          className="px-4 py-2 bg-gradient-to-r from-gray-600/20 to-gray-500/20 text-gray-200 rounded-lg text-sm font-medium border border-gray-500/30 hover:from-gray-600/30 hover:to-gray-500/30 hover:border-gray-500/40 transition-all duration-300 backdrop-blur-sm"
                         >
                           {skill}
                         </motion.span>
